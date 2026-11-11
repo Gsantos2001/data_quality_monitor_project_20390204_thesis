@@ -1,0 +1,18 @@
+{
+  "missing_tokens": ["", "NULL", "N/A", "NaN"],
+  "duplicate_checks": [
+    {"id": "duplicates_full_row", "columns": null},
+    {"id": "duplicate_product_id", "columns": ["product_id"]}
+  ],
+  "validity_checks": [
+    {"id": "quantity_nonnegative", "column": "quantity", "kind": "numeric_range", "min": 0, "integer": true},
+    {"id": "unit_price_nonnegative", "column": "unit_price", "kind": "numeric_range", "min": 0},
+    {"id": "allowed_category", "column": "category", "kind": "allowed_values", "values": ["Stationery", "Furniture"]},
+    {"id": "start_date_format", "column": "start_date", "kind": "date_format", "format": "%Y-%m-%d"},
+    {"id": "end_date_format", "column": "end_date", "kind": "date_format", "format": "%Y-%m-%d"}
+  ],
+  "consistency_checks": [
+    {"id": "date_order", "kind": "comparison", "left": "start_date", "right": "end_date", "operator": "<=", "data_type": "date", "format": "%Y-%m-%d"},
+    {"id": "total_calculation", "kind": "product_equals", "left": "quantity", "right": "unit_price", "result": "total_price", "tolerance": 0.01}
+  ]
+}

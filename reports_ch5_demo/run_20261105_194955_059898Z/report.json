@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "input_file": "support_tickets_updated.csv",
+    "rules_file": "support_tickets_rules.json",
+    "generated_at_utc": "2026-11-05T19:49:55.059898+00:00",
+    "row_count": 9,
+    "column_count": 5,
+    "data_row_numbering": "1-based; does not include header; not physical file line numbers",
+    "input_sha256": "2f98cf6c99dcaf5318aa5b0dd57bfe21a854fe19d1a0de725471b74fa8b07624",
+    "rules_sha256": "9893b8033cc01511ff7272b126051618b3e8c36e65f4262c1628211b5f98ca3e",
+    "processing_time_seconds": 0.012114,
+    "python_version": "3.13.1",
+    "pandas_version": "3.1.0",
+    "numpy_version": "2.5.4",
+    "dataset_id": "support_tickets"
+  },
+  "check_status_counts": {
+    "completed": 12,
+    "skipped": 0,
+    "error": 0
+  },
+  "notes": [
+    "Τα ποσοστά αφορούν τις εξετασμένες περιπτώσεις κάθε ελέγχου.",
+    "Οι κατηγορίες σφαλμάτων μπορεί να επικαλύπτονται: δεν αθροίζονται ως μοναδικές προβληματικές εγγραφές.",
+    "Το null σημαίνει μη διαθέσιμο αποτέλεσμα, όχι μηδέν προβλήματα."
+  ],
+  "checks": [
+    {
+      "check_id": "missing:ticket_id",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "ticket_id"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:description",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 1,
+      "issue_rate_percent": 11.11,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "description"
+      },
+      "findings": [
+        {
+          "check_id": "missing:description",
+          "category": "missing",
+          "row_number": 8,
+          "column": "description",
+          "message": "Ελλιπής τιμή"
+        }
+      ]
+    },
+    {
+      "check_id": "missing:priority",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "priority"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:status",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "status"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:first_response_hours",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "first_response_hours"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "duplicates_full_row",
+      "category": "duplicates",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "columns": [
+          "ticket_id",
+          "description",
+          "priority",
+          "status",
+          "first_response_hours"
+        ],
+        "counting": "keep_first; subsequent occurrences"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "duplicate_ticket_id",
+      "category": "duplicates",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 1,
+      "issue_rate_percent": 11.11,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "columns": [
+          "ticket_id"
+        ],
+        "counting": "keep_first; subsequent occurrences"
+      },
+      "findings": [
+        {
+          "check_id": "duplicate_ticket_id",
+          "category": "duplicates",
+          "row_number": 6,
+          "column": "ticket_id",
+          "message": "Πρόσθετη διπλότυπη εγγραφή"
+        }
+      ]
+    },
+    {
+      "check_id": "ticket_id_format",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "ticket_id",
+        "kind": "regex"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "description_length",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 8,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 1,
+      "reason": null,
+      "details": {
+        "column": "description",
+        "kind": "text_length"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "allowed_priority",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "priority",
+        "kind": "allowed_values"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "allowed_status",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 1,
+      "issue_rate_percent": 11.11,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "status",
+        "kind": "allowed_values"
+      },
+      "findings": [
+        {
+          "check_id": "allowed_status",
+          "category": "validity",
+          "row_number": 8,
+          "column": "status",
+          "message": "Παραβίαση κανόνα: allowed_values"
+        }
+      ]
+    },
+    {
+      "check_id": "response_hours_nonnegative",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 9,
+      "issue_count": 1,
+      "issue_rate_percent": 11.11,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "first_response_hours",
+        "kind": "numeric_range"
+      },
+      "findings": [
+        {
+          "check_id": "response_hours_nonnegative",
+          "category": "validity",
+          "row_number": 8,
+          "column": "first_response_hours",
+          "message": "Παραβίαση κανόνα: numeric_range"
+        }
+      ]
+    }
+  ]
+}

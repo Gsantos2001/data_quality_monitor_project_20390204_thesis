@@ -1,0 +1,13 @@
+﻿check_id,category,status,checked_count,issue_count,issue_rate_percent,not_evaluated_count,reason,details
+missing:ticket_id,missing,completed,9,0,0.0,0,,"{""column"": ""ticket_id""}"
+missing:description,missing,completed,9,2,22.22,0,,"{""column"": ""description""}"
+missing:priority,missing,completed,9,0,0.0,0,,"{""column"": ""priority""}"
+missing:status,missing,completed,9,0,0.0,0,,"{""column"": ""status""}"
+missing:first_response_hours,missing,completed,9,0,0.0,0,,"{""column"": ""first_response_hours""}"
+duplicates_full_row,duplicates,completed,9,0,0.0,0,,"{""columns"": [""ticket_id"", ""description"", ""priority"", ""status"", ""first_response_hours""], ""counting"": ""keep_first; subsequent occurrences""}"
+duplicate_ticket_id,duplicates,completed,9,1,11.11,0,,"{""columns"": [""ticket_id""], ""counting"": ""keep_first; subsequent occurrences""}"
+ticket_id_format,validity,completed,9,0,0.0,0,,"{""column"": ""ticket_id"", ""kind"": ""regex""}"
+description_length,validity,completed,7,2,28.57,2,,"{""column"": ""description"", ""kind"": ""text_length""}"
+allowed_priority,validity,completed,9,1,11.11,0,,"{""column"": ""priority"", ""kind"": ""allowed_values""}"
+allowed_status,validity,completed,9,1,11.11,0,,"{""column"": ""status"", ""kind"": ""allowed_values""}"
+response_hours_nonnegative,validity,completed,9,2,22.22,0,,"{""column"": ""first_response_hours"", ""kind"": ""numeric_range""}"

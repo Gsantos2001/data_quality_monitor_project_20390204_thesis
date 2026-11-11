@@ -1,0 +1,20 @@
+ΑΝΑΦΟΡΑ ΑΞΙΟΛΟΓΗΣΗΣ ΠΟΙΟΤΗΤΑΣ ΔΕΔΟΜΕΝΩΝ
+Αρχείο: support_tickets_updated.csv
+Εγγραφές: 9 | Στήλες: 5
+Έλεγχοι: 12 | Ολοκληρώθηκαν: 12 | Παραλείφθηκαν: 0 | Σφάλματα: 0
+
+missing:ticket_id: 0/9 προβλήματα (0.00%)
+missing:description: 1/9 προβλήματα (11.11%)
+missing:priority: 0/9 προβλήματα (0.00%)
+missing:status: 0/9 προβλήματα (0.00%)
+missing:first_response_hours: 0/9 προβλήματα (0.00%)
+duplicates_full_row: 0/9 προβλήματα (0.00%)
+duplicate_ticket_id: 1/9 προβλήματα (11.11%)
+ticket_id_format: 0/9 προβλήματα (0.00%)
+description_length: 0/8 προβλήματα (0.00%)
+allowed_priority: 0/9 προβλήματα (0.00%)
+allowed_status: 1/9 προβλήματα (11.11%)
+response_hours_nonnegative: 1/9 προβλήματα (11.11%)
+
+Σημείωση: τα ευρήματα διαφορετικών ελέγχων ενδέχεται να αφορούν την ίδια εγγραφή.
+Για λεπτομέρειες δείτε τα report.json, checks.csv και findings.csv.

@@ -1,0 +1,10 @@
+﻿check_id,category,row_number,column,message
+missing:description,missing,3,description,Ελλιπής τιμή
+missing:description,missing,8,description,Ελλιπής τιμή
+duplicate_ticket_id,duplicates,6,ticket_id,Πρόσθετη διπλότυπη εγγραφή
+description_length,validity,2,description,Παραβίαση κανόνα: text_length
+description_length,validity,9,description,Παραβίαση κανόνα: text_length
+allowed_priority,validity,7,priority,Παραβίαση κανόνα: allowed_values
+allowed_status,validity,8,status,Παραβίαση κανόνα: allowed_values
+response_hours_nonnegative,validity,7,first_response_hours,Παραβίαση κανόνα: numeric_range
+response_hours_nonnegative,validity,8,first_response_hours,Παραβίαση κανόνα: numeric_range

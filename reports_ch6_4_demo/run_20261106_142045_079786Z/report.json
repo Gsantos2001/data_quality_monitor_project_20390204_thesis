@@ -1,0 +1,396 @@
+{
+  "metadata": {
+    "input_file": "sample_data.csv",
+    "rules_file": "rules.json",
+    "generated_at_utc": "2026-11-06T14:20:45.079786+00:00",
+    "row_count": 12,
+    "column_count": 8,
+    "data_row_numbering": "1-based; does not include header; not physical file line numbers",
+    "input_sha256": "0132b5365bfa57d1fca1148913def9546645bc1400007b7b26730689d34f422d",
+    "rules_sha256": "6ccb859a9fe9984a23f4f1cf63eb4bdac17a6ec30d31fe0d41a5c45a56395a72",
+    "processing_time_seconds": 0.01262,
+    "python_version": "3.13.1",
+    "pandas_version": "3.1.0",
+    "numpy_version": "2.5.4",
+    "dataset_id": "store_products"
+  },
+  "check_status_counts": {
+    "completed": 17,
+    "skipped": 0,
+    "error": 0
+  },
+  "notes": [
+    "Τα ποσοστά αφορούν τις εξετασμένες περιπτώσεις κάθε ελέγχου.",
+    "Οι κατηγορίες σφαλμάτων μπορεί να επικαλύπτονται: δεν αθροίζονται ως μοναδικές προβληματικές εγγραφές.",
+    "Το null σημαίνει μη διαθέσιμο αποτέλεσμα, όχι μηδέν προβλήματα."
+  ],
+  "checks": [
+    {
+      "check_id": "missing:product_id",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "product_id"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:product_name",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 3,
+      "issue_rate_percent": 25.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "product_name"
+      },
+      "findings": [
+        {
+          "check_id": "missing:product_name",
+          "category": "missing",
+          "row_number": 2,
+          "column": "product_name",
+          "message": "Ελλιπής τιμή"
+        },
+        {
+          "check_id": "missing:product_name",
+          "category": "missing",
+          "row_number": 9,
+          "column": "product_name",
+          "message": "Ελλιπής τιμή"
+        },
+        {
+          "check_id": "missing:product_name",
+          "category": "missing",
+          "row_number": 10,
+          "column": "product_name",
+          "message": "Ελλιπής τιμή"
+        }
+      ]
+    },
+    {
+      "check_id": "missing:quantity",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "quantity"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:unit_price",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "unit_price"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:total_price",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "total_price"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:category",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "category"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:start_date",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "start_date"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "missing:end_date",
+      "category": "missing",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "end_date"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "duplicates_full_row",
+      "category": "duplicates",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 1,
+      "issue_rate_percent": 8.33,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "columns": [
+          "product_id",
+          "product_name",
+          "quantity",
+          "unit_price",
+          "total_price",
+          "category",
+          "start_date",
+          "end_date"
+        ],
+        "counting": "keep_first; subsequent occurrences"
+      },
+      "findings": [
+        {
+          "check_id": "duplicates_full_row",
+          "category": "duplicates",
+          "row_number": 7,
+          "column": "product_id, product_name, quantity, unit_price, total_price, category, start_date, end_date",
+          "message": "Πρόσθετη διπλότυπη εγγραφή"
+        }
+      ]
+    },
+    {
+      "check_id": "duplicate_product_id",
+      "category": "duplicates",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 2,
+      "issue_rate_percent": 16.67,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "columns": [
+          "product_id"
+        ],
+        "counting": "keep_first; subsequent occurrences"
+      },
+      "findings": [
+        {
+          "check_id": "duplicate_product_id",
+          "category": "duplicates",
+          "row_number": 7,
+          "column": "product_id",
+          "message": "Πρόσθετη διπλότυπη εγγραφή"
+        },
+        {
+          "check_id": "duplicate_product_id",
+          "category": "duplicates",
+          "row_number": 8,
+          "column": "product_id",
+          "message": "Πρόσθετη διπλότυπη εγγραφή"
+        }
+      ]
+    },
+    {
+      "check_id": "quantity_nonnegative",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 1,
+      "issue_rate_percent": 8.33,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "quantity",
+        "kind": "numeric_range"
+      },
+      "findings": [
+        {
+          "check_id": "quantity_nonnegative",
+          "category": "validity",
+          "row_number": 3,
+          "column": "quantity",
+          "message": "Παραβίαση κανόνα: numeric_range"
+        }
+      ]
+    },
+    {
+      "check_id": "unit_price_nonnegative",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 2,
+      "issue_rate_percent": 16.67,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "unit_price",
+        "kind": "numeric_range"
+      },
+      "findings": [
+        {
+          "check_id": "unit_price_nonnegative",
+          "category": "validity",
+          "row_number": 4,
+          "column": "unit_price",
+          "message": "Παραβίαση κανόνα: numeric_range"
+        },
+        {
+          "check_id": "unit_price_nonnegative",
+          "category": "validity",
+          "row_number": 11,
+          "column": "unit_price",
+          "message": "Παραβίαση κανόνα: numeric_range"
+        }
+      ]
+    },
+    {
+      "check_id": "allowed_category",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 1,
+      "issue_rate_percent": 8.33,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "category",
+        "kind": "allowed_values"
+      },
+      "findings": [
+        {
+          "check_id": "allowed_category",
+          "category": "validity",
+          "row_number": 5,
+          "column": "category",
+          "message": "Παραβίαση κανόνα: allowed_values"
+        }
+      ]
+    },
+    {
+      "check_id": "start_date_format",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 1,
+      "issue_rate_percent": 8.33,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "start_date",
+        "kind": "date_format"
+      },
+      "findings": [
+        {
+          "check_id": "start_date_format",
+          "category": "validity",
+          "row_number": 6,
+          "column": "start_date",
+          "message": "Παραβίαση κανόνα: date_format"
+        }
+      ]
+    },
+    {
+      "check_id": "end_date_format",
+      "category": "validity",
+      "status": "completed",
+      "checked_count": 12,
+      "issue_count": 0,
+      "issue_rate_percent": 0.0,
+      "not_evaluated_count": 0,
+      "reason": null,
+      "details": {
+        "column": "end_date",
+        "kind": "date_format"
+      },
+      "findings": []
+    },
+    {
+      "check_id": "date_order",
+      "category": "consistency",
+      "status": "completed",
+      "checked_count": 11,
+      "issue_count": 1,
+      "issue_rate_percent": 9.09,
+      "not_evaluated_count": 1,
+      "reason": null,
+      "details": {
+        "columns": [
+          "start_date",
+          "end_date"
+        ],
+        "kind": "comparison",
+        "excluded_missing_or_unparseable": 1
+      },
+      "findings": [
+        {
+          "check_id": "date_order",
+          "category": "consistency",
+          "row_number": 12,
+          "column": "start_date, end_date",
+          "message": "Παραβίαση κανόνα: comparison"
+        }
+      ]
+    },
+    {
+      "check_id": "total_calculation",
+      "category": "consistency",
+      "status": "completed",
+      "checked_count": 11,
+      "issue_count": 1,
+      "issue_rate_percent": 9.09,
+      "not_evaluated_count": 1,
+      "reason": null,
+      "details": {
+        "columns": [
+          "quantity",
+          "unit_price",
+          "total_price"
+        ],
+        "kind": "product_equals",
+        "excluded_missing_or_unparseable": 1
+      },
+      "findings": [
+        {
+          "check_id": "total_calculation",
+          "category": "consistency",
+          "row_number": 12,
+          "column": "quantity, unit_price, total_price",
+          "message": "Παραβίαση κανόνα: product_equals"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+﻿check_id,category,row_number,column,message
+missing:description,missing,8,description,Ελλιπής τιμή
+duplicate_ticket_id,duplicates,6,ticket_id,Πρόσθετη διπλότυπη εγγραφή
+allowed_status,validity,8,status,Παραβίαση κανόνα: allowed_values
+response_hours_nonnegative,validity,8,first_response_hours,Παραβίαση κανόνα: numeric_range

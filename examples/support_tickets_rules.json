@@ -1,0 +1,48 @@
+{
+  "missing_tokens": ["", "NULL", "N/A", "NaN"],
+  "duplicate_checks": [
+    {
+      "id": "duplicates_full_row",
+      "columns": null
+    },
+    {
+      "id": "duplicate_ticket_id",
+      "columns": ["ticket_id"]
+    }
+  ],
+  "validity_checks": [
+    {
+      "id": "ticket_id_format",
+      "column": "ticket_id",
+      "kind": "regex",
+      "pattern": "T[0-9]{3}"
+    },
+    {
+      "id": "description_length",
+      "column": "description",
+      "kind": "text_length",
+      "min_length": 15,
+      "max_length": 100
+    },
+    {
+      "id": "allowed_priority",
+      "column": "priority",
+      "kind": "allowed_values",
+      "values": ["Low", "Medium", "High"]
+    },
+    {
+      "id": "allowed_status",
+      "column": "status",
+      "kind": "allowed_values",
+      "values": ["Open", "In Progress", "Closed"]
+    },
+    {
+      "id": "response_hours_nonnegative",
+      "column": "first_response_hours",
+      "kind": "numeric_range",
+      "min": 0,
+      "integer": true
+    }
+  ],
+  "consistency_checks": []
+}

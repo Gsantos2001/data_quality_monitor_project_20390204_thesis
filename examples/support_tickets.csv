@@ -1,0 +1,11 @@
+
+ticket_id,description,priority,status,first_response_hours
+T001,Δεν λειτουργεί η σύνδεση στο διαδίκτυο,High,Open,4
+T002,Πρόβλημα,Medium,Open,12
+T003,,Low,Closed,2
+T004,Η εφαρμογή κλείνει όταν πατάω αποθήκευση,High,In Progress,8
+T005,Δεν μπορώ να συνδεθώ στον λογαριασμό,Medium,Closed,6
+T005,Χρειάζομαι αλλαγή κωδικού πρόσβασης,High,Open,3
+T007,Η σύνδεση είναι πολύ αργή,Urgent,Open,-2
+T008,NULL,Low,Unknown,abc
+T009,Παρακαλώ εξετάστε αυτό το πρόβλημα με την αποστολή αρχείων και ενημερώστε με για τις απαιτούμενες ενέργειες,Medium,In Progress,7

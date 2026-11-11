@@ -1,0 +1,25 @@
+ΑΝΑΦΟΡΑ ΑΞΙΟΛΟΓΗΣΗΣ ΠΟΙΟΤΗΤΑΣ ΔΕΔΟΜΕΝΩΝ
+Αρχείο: sample_data.csv
+Εγγραφές: 12 | Στήλες: 8
+Έλεγχοι: 17 | Ολοκληρώθηκαν: 17 | Παραλείφθηκαν: 0 | Σφάλματα: 0
+
+missing:product_id: 0/12 προβλήματα (0.00%)
+missing:product_name: 3/12 προβλήματα (25.00%)
+missing:quantity: 0/12 προβλήματα (0.00%)
+missing:unit_price: 0/12 προβλήματα (0.00%)
+missing:total_price: 0/12 προβλήματα (0.00%)
+missing:category: 0/12 προβλήματα (0.00%)
+missing:start_date: 0/12 προβλήματα (0.00%)
+missing:end_date: 0/12 προβλήματα (0.00%)
+duplicates_full_row: 1/12 προβλήματα (8.33%)
+duplicate_product_id: 2/12 προβλήματα (16.67%)
+quantity_nonnegative: 1/12 προβλήματα (8.33%)
+unit_price_nonnegative: 2/12 προβλήματα (16.67%)
+allowed_category: 1/12 προβλήματα (8.33%)
+start_date_format: 1/12 προβλήματα (8.33%)
+end_date_format: 0/12 προβλήματα (0.00%)
+date_order: 1/11 προβλήματα (9.09%)
+total_calculation: 1/11 προβλήματα (9.09%)
+
+Σημείωση: τα ευρήματα διαφορετικών ελέγχων ενδέχεται να αφορούν την ίδια εγγραφή.
+Για λεπτομέρειες δείτε τα report.json, checks.csv και findings.csv.

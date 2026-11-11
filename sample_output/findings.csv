@@ -1,0 +1,14 @@
+﻿check_id,category,row_number,column,message
+missing:product_name,missing,2,product_name,Ελλιπής τιμή
+missing:product_name,missing,9,product_name,Ελλιπής τιμή
+missing:product_name,missing,10,product_name,Ελλιπής τιμή
+duplicates_full_row,duplicates,7,"product_id, product_name, quantity, unit_price, total_price, category, start_date, end_date",Πρόσθετη διπλότυπη εγγραφή
+duplicate_product_id,duplicates,7,product_id,Πρόσθετη διπλότυπη εγγραφή
+duplicate_product_id,duplicates,8,product_id,Πρόσθετη διπλότυπη εγγραφή
+quantity_nonnegative,validity,3,quantity,Παραβίαση κανόνα: numeric_range
+unit_price_nonnegative,validity,4,unit_price,Παραβίαση κανόνα: numeric_range
+unit_price_nonnegative,validity,11,unit_price,Παραβίαση κανόνα: numeric_range
+allowed_category,validity,5,category,Παραβίαση κανόνα: allowed_values
+start_date_format,validity,6,start_date,Παραβίαση κανόνα: date_format
+date_order,consistency,12,"start_date, end_date",Παραβίαση κανόνα: comparison
+total_calculation,consistency,12,"quantity, unit_price, total_price",Παραβίαση κανόνα: product_equals
