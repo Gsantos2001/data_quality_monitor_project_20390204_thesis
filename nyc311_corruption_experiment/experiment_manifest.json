@@ -1,0 +1,19 @@
+{
+  "source": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\NYC_311_expiriments\\nyc311_datasets\\nyc311_10000.csv",
+  "output": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\data_quality_monitor_project_20390204_thesis\\nyc311_corruption_experiment\\nyc311_10000_corrupted.csv",
+  "seed": 20390204,
+  "original_rows": 10000,
+  "columns": 44,
+  "errors_per_type": 20,
+  "total_injected_changes": 140,
+  "error_type_counts": {
+    "missing_agency": 20,
+    "duplicate_unique_key": 20,
+    "invalid_unique_key": 20,
+    "invalid_closed_date": 20,
+    "invalid_latitude": 20,
+    "invalid_zip": 20,
+    "reversed_dates": 20
+  },
+  "note": "Το ground truth δηλώνει τις γνωστές αλλαγές, όχι όλα τα προϋπάρχοντα προβλήματα. Οι έλεγχοι της εφαρμογής ενδέχεται να έχουν επιπλέον ευρήματα βάσης."
+}

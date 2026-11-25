@@ -1,0 +1,5 @@
+﻿generated_at_utc;report_path;status;issue_rate_percent;change_percentage_points;trend
+2026-11-25T11:35:44.100326+00:00;reports_nyc311_monitoring\run_20261125_113544_100326Z\report.json;completed;0.0;;
+2026-11-25T11:36:55.179508+00:00;reports_nyc311_monitoring\run_20261125_113655_179508Z\report.json;completed;0.0;0.0;unchanged
+2026-11-25T11:37:10.776501+00:00;reports_nyc311_monitoring\run_20261125_113710_776501Z\report.json;completed;0.2;0.2;worsened
+2026-11-25T11:37:15.522151+00:00;reports_nyc311_monitoring\run_20261125_113715_522151Z\report.json;completed;0.0;-0.2;improved

@@ -299,7 +299,7 @@ def test_text_length_rule_validation():
 
 
 def test_numeric_range_rejects_invalid_limits():
-    """Numeric bounds must be real finite numbers, not null/NaN/infinity."""
+    #Τα αριθμητικά όρια πρέπει να είναι πραγματικοί και πεπερασμένοι αριθμοί και όχι τιμές null, NaN ή άπειρο.
     invalid_limits = [None, True, "10", float("nan"), float("inf"), float("-inf")]
     for name in ("min", "max"):
         for value in invalid_limits:
@@ -323,7 +323,7 @@ def test_numeric_range_rejects_invalid_limits():
 
 
 def test_date_format_requires_format_string():
-    # Οι έλεγχοι ημερομηνιών απαιτούν τον ρητό καθορισμό ενός μη κενού string μορφοποίησης.
+    #Οι έλεγχοι ημερομηνιών απαιτούν τον ρητό καθορισμό μιας μη κενής συμβολοσειράς μορφοποίησης.
     rule = {"id": "valid_date", "column": "created_at", "kind": "date_format"}
     for invalid_format in (None, "", 123):
         invalid = dict(rule)

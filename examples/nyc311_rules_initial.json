@@ -1,0 +1,71 @@
+{
+  "missing_tokens": [
+    "",
+    "NULL",
+    "N/A",
+    "NaN"
+  ],
+  "duplicate_checks": [
+    {
+      "id": "duplicates_full_row",
+      "columns": null
+    },
+    {
+      "id": "duplicate_unique_key",
+      "columns": [
+        "unique_key"
+      ]
+    }
+  ],
+  "validity_checks": [
+    {
+      "id": "unique_key_numeric",
+      "column": "unique_key",
+      "kind": "regex",
+      "pattern": "[0-9]+"
+    },
+    {
+      "id": "created_date_format",
+      "column": "created_date",
+      "kind": "date_format",
+      "format": "%Y-%m-%dT%H:%M:%S.%f"
+    },
+    {
+      "id": "closed_date_format",
+      "column": "closed_date",
+      "kind": "date_format",
+      "format": "%Y-%m-%dT%H:%M:%S.%f"
+    },
+    {
+      "id": "latitude_range",
+      "column": "latitude",
+      "kind": "numeric_range",
+      "min": -90,
+      "max": 90
+    },
+    {
+      "id": "longitude_range",
+      "column": "longitude",
+      "kind": "numeric_range",
+      "min": -180,
+      "max": 180
+    },
+    {
+      "id": "incident_zip_format",
+      "column": "incident_zip",
+      "kind": "regex",
+      "pattern": "[0-9]{5}"
+    }
+  ],
+  "consistency_checks": [
+    {
+      "id": "created_before_closed",
+      "kind": "comparison",
+      "left": "created_date",
+      "right": "closed_date",
+      "operator": "<=",
+      "data_type": "date",
+      "format": "%Y-%m-%dT%H:%M:%S.%f"
+    }
+  ]
+}

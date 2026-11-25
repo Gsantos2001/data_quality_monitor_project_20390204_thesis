@@ -1,0 +1,51 @@
+{
+  "input_file": "nyc311_1000000.csv",
+  "rows": 1000000,
+  "missing_at_least_one_date": 8837,
+  "invalid_nonempty_dates": 0,
+  "comparable": 991163,
+  "violations_created_after_closed": 9830,
+  "violation_percent_of_comparable": 0.992,
+  "gap_categories": {
+    "(1 λεπτό, 1 ώρα]": 7,
+    "(7 ημέρες, 30 ημέρες]": 3178,
+    "(1 ημέρα, 7 ημέρες]": 6595,
+    "> 30 ημέρες": 36,
+    "(1 ώρα, 1 ημέρα]": 14
+  },
+  "agencies_with_violations_top_10": [
+    [
+      "DOT",
+      9824
+    ],
+    [
+      "DEP",
+      5
+    ],
+    [
+      "DSNY",
+      1
+    ]
+  ],
+  "statuses_with_violations": [
+    [
+      "Pending",
+      9809
+    ],
+    [
+      "Closed",
+      21
+    ]
+  ],
+  "largest_gap_example": {
+    "row_number": 129288,
+    "unique_key": "45436412",
+    "created_date": "2020-01-21T10:18:52.000",
+    "closed_date": "2004-11-15T00:00:00.000",
+    "created_minus_closed_hours": 133090.314,
+    "agency": "DSNY",
+    "status": "Pending",
+    "complaint_type": "Graffiti"
+  },
+  "methodology": "Οι χρόνοι ερμηνεύονται ως naive datetime σύμφωνα με %Y-%m-%dT%H:%M:%S.%f. Δεν έγινε μετατροπή ζώνης ώρας."
+}

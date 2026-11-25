@@ -1,4 +1,4 @@
-#Συντονισμός των ελέγχων και ανεξάρτητη διαχείριση σφαλμάτων κατά την εκτέλεσή τους.
+"""Συντονισμός των ελέγχων και ανεξάρτητη διαχείριση σφαλμάτων κατά την εκτέλεσή τους."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -18,11 +18,13 @@ from .reporting import create_report
 from .rules import load_rules
 
 
-def evaluate_dataframe(df: pd.DataFrame, rules: dict[str, Any]) -> list[CheckResult]:
+def evaluate_dataframe(df: pd.DataFrame, rules: dict[str, Any], max_findings: int | None = None) -> list[CheckResult]:
+    if max_findings is not None and (isinstance(max_findings, bool) or not isinstance(max_findings, int) or max_findings < 0):
+        raise ValueError("Το max_findings πρέπει να είναι μη αρνητικός ακέραιος.")
     #Επιστροφή αποτελεσμάτων χωρίς τροποποίηση του DataFrame. Οι κανόνες πρέπει να έχουν προηγουμένως επικυρωθεί.
     results: list[CheckResult] = []
     tokens = rules.get("missing_tokens", [""])
-    results.extend(check_missing(df, tokens))
+    results.extend(check_missing(df, tokens, max_findings=max_findings))
 
     for group, checker in (
         ("duplicate_checks", check_duplicate),
@@ -32,7 +34,7 @@ def evaluate_dataframe(df: pd.DataFrame, rules: dict[str, Any]) -> list[CheckRes
         category = group.removesuffix("_checks")
         for rule in rules.get(group, []):
             try:
-                results.append(checker(df, rule, tokens))
+                results.append(checker(df, rule, tokens, max_findings=max_findings))
             except Exception as exc:
                 #Η αποτυχία ενός ανεξάρτητου ελέγχου δεν πρέπει να αποκρύπτει τα αποτελέσματα των υπόλοιπων ελέγχων. Το σφάλμα πρέπει να καταγράφεται και να αναφέρεται.
                 results.append(failed(rule["id"], category, f"{type(exc).__name__}: {exc}"))
@@ -44,6 +46,7 @@ def run_analysis(
     rules_path: str | Path | None = None,
     output_base: str | Path = "reports",
     dataset_id: str | None = None,
+    max_findings: int | None = None,
 ) -> tuple[Path, dict[str, Any]]:
     if dataset_id is not None:
         dataset_id = dataset_id.strip()
@@ -54,7 +57,7 @@ def run_analysis(
     start = time.perf_counter()
     rules = load_rules(rules_path)
     df = read_csv(file_path)
-    results = evaluate_dataframe(df, rules)
+    results = evaluate_dataframe(df, rules, max_findings=max_findings)
     elapsed = round(time.perf_counter() - start, 6)
     input_digest = hashlib.sha256(Path(file_path).read_bytes()).hexdigest()
     rules_digest = hashlib.sha256(
@@ -69,6 +72,7 @@ def run_analysis(
         "python_version": sys.version.split()[0],
         "pandas_version": pd.__version__,
         "numpy_version": np.__version__,
+        "max_findings_per_check": max_findings,
     }
 
     if dataset_id is not None:

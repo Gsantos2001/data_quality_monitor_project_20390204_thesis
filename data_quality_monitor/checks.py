@@ -1,4 +1,4 @@
-#Έλεγχοι ποιότητας δεδομένων που δεν τροποποιούν τα αρχικά DataFrames ή αρχεία.
+"""Έλεγχοι ποιότητας δεδομένων που δεν τροποποιούν τα αρχικά DataFrames ή αρχεία."""
 from __future__ import annotations
 
 from datetime import datetime
@@ -30,11 +30,23 @@ def _rows(mask: pd.Series) -> list[int]:
     return [int(i) + 1 for i in np.flatnonzero(mask.to_numpy(dtype=bool))]
 
 
-def _findings(check_id: str, category: str, rows: list[int], column: str, message: str) -> list[Finding]:
-    return [Finding(check_id, category, row_number, column, message) for row_number in rows]
+def _findings(check_id: str, category: str, rows, column: str, message: str,
+              max_findings: int | None = None) -> list[Finding]:
+    if max_findings is None:
+        return [Finding(check_id, category, int(row_number), column, message) for row_number in rows]
+    return [Finding(check_id, category, int(row_number), column, message)
+            for row_number in rows[:max_findings]]
 
 
-def check_missing(df: pd.DataFrame, tokens: list[str]) -> list[CheckResult]:
+def _bad_rows(mask: pd.Series, max_findings: int | None):
+    # Ο αριθμός υπολογίζεται χωρίς τη δημιουργία αντικειμένων για όλες τις αστοχίες.
+    indices = np.flatnonzero(mask.to_numpy(dtype=bool))
+    stored = indices if max_findings is None else indices[:max_findings]
+    return int(len(indices)), stored + 1
+
+
+
+def check_missing(df: pd.DataFrame, tokens: list[str], max_findings: int | None = None) -> list[CheckResult]:
     results: list[CheckResult] = []
     for column in df.columns:
         check_id = f"missing:{column}"
@@ -42,13 +54,13 @@ def check_missing(df: pd.DataFrame, tokens: list[str]) -> list[CheckResult]:
             results.append(skipped(check_id, "missing", "Δεν υπάρχουν εγγραφές για έλεγχο."))
             continue
         mask = missing_mask(df[column], tokens)
-        rows = _rows(mask)
+        issue_count, rows = _bad_rows(mask, max_findings)
         issues = _findings(check_id, "missing", rows, column, "Ελλιπής τιμή")
-        results.append(completed(check_id, "missing", len(df), issues, details={"column": column}))
+        results.append(completed(check_id, "missing", len(df), issues, details={"column": column}, issue_count=issue_count))
     return results
 
 
-def check_duplicate(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str]) -> CheckResult:
+def check_duplicate(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str], max_findings: int | None = None) -> CheckResult:
     check_id = rule["id"]
     if df.empty:
         return skipped(check_id, "duplicates", "Δεν υπάρχουν εγγραφές για έλεγχο.")
@@ -66,27 +78,64 @@ def check_duplicate(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str]) -
             eligible_mask &= ~missing_mask(df[col], tokens)
         display_cols = cols
     eligible = df.loc[eligible_mask]
+
     if eligible.empty:
         return skipped(check_id, "duplicates", "Δεν υπάρχουν συγκρίσιμες εγγραφές.")
     duplicated = eligible.duplicated(subset=cols, keep="first")
-    rows = [int(i) + 1 for i in eligible.index[duplicated]]
+    issue_count = int(duplicated.sum())
+    bad_index = eligible.index[duplicated]
+
+    if max_findings is not None:
+        bad_index = bad_index[:max_findings]
+        
+    rows = [int(i) + 1 for i in bad_index]
     issues = _findings(check_id, "duplicates", rows, ", ".join(display_cols), "Πρόσθετη διπλότυπη εγγραφή")
     return completed(
         check_id, "duplicates", len(eligible), issues,
         not_evaluated_count=len(df) - len(eligible),
         details={"columns": display_cols, "counting": "keep_first; subsequent occurrences"},
+        issue_count=issue_count,
     )
+
 
 
 def _strict_date(value: str, fmt: str) -> datetime | None:
     try:
         result = datetime.strptime(value, fmt)
+
+        if "%f" in fmt:
+            prefix_fmt, suffix_fmt = fmt.split("%f", 1)
+
+            prefix = result.strftime(prefix_fmt)
+            suffix = result.strftime(suffix_fmt)
+
+            if not value.startswith(prefix):
+                return None
+
+            if suffix and not value.endswith(suffix):
+                return None
+
+            end = len(value) - len(suffix) if suffix else len(value)
+            fraction = value[len(prefix):end]
+
+            if not (
+                1 <= len(fraction) <= 6
+                and fraction.isascii()
+                and fraction.isdecimal()
+            ):
+                return None
+
+            microseconds = int(fraction.ljust(6, "0"))
+
+            return result if microseconds == result.microsecond else None
+
         return result if result.strftime(fmt) == value else None
+
     except (ValueError, TypeError):
         return None
 
 
-def check_validity(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str]) -> CheckResult:
+def check_validity(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str], max_findings: int | None = None) -> CheckResult:
     check_id = rule["id"]
     column = rule["column"]
     if column not in df.columns:
@@ -129,16 +178,22 @@ def check_validity(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str]) ->
 
     else:  #pragma: no cover; Η επικύρωση του JSON αποτρέπει την εμφάνιση αυτής της περίπτωσης.
         return failed(check_id, "validity", f"Μη υποστηριζόμενος κανόνας: {kind}")
-    rows = [int(i) + 1 for i in eligible.index[bad.fillna(True)]]
+    bad = bad.fillna(True)
+    issue_count = int(bad.sum())
+    bad_index = eligible.index[bad]
+    if max_findings is not None:
+        bad_index = bad_index[:max_findings]
+    rows = [int(i) + 1 for i in bad_index]
     issues = _findings(check_id, "validity", rows, column, f"Παραβίαση κανόνα: {kind}")
     return completed(
         check_id, "validity", len(eligible), issues,
         not_evaluated_count=len(df) - len(eligible),
         details={"column": column, "kind": kind},
+        issue_count=issue_count,
     )
 
 
-def check_consistency(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str]) -> CheckResult:
+def check_consistency(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str], max_findings: int | None = None) -> CheckResult:
     check_id = rule["id"]
     category = "consistency"
     columns = [rule["left"], rule["right"]]
@@ -198,6 +253,9 @@ def check_consistency(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str])
     else:  # pragma: no cover
         return failed(check_id, category, f"Μη υποστηριζόμενος κανόνας: {kind}")
 
+    issue_count = len(bad_indices)
+    if max_findings is not None:
+        bad_indices = bad_indices[:max_findings]
     rows = [int(i) + 1 for i in bad_indices]
     issues = _findings(check_id, category, rows, ", ".join(columns), f"Παραβίαση κανόνα: {kind}")
     return completed(
@@ -205,4 +263,5 @@ def check_consistency(df: pd.DataFrame, rule: dict[str, Any], tokens: list[str])
         not_evaluated_count=len(df) - int(comparable.sum()),
         details={"columns": columns, "kind": kind,
                  "excluded_missing_or_unparseable": len(df) - int(comparable.sum())},
+        issue_count=issue_count,
     )

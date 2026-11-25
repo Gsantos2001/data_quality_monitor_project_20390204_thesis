@@ -1,3 +1,4 @@
+"""Διαχείριση ιστορικών αναφορών και σύγκριση αποτελεσμάτων ποιότητας δεδομένων."""
 import json
 from pathlib import Path
 from typing import Any

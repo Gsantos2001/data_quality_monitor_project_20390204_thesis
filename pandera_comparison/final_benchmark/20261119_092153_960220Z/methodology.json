@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "20261119_092153_960220Z",
+  "python_executable": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\data_quality_monitor_project_20390204_thesis\\.venv\\Scripts\\python.exe",
+  "sizes": [
+    1000,
+    10000,
+    100000,
+    1000000
+  ],
+  "repetitions": 3,
+  "dqm_max_findings_per_check": 100,
+  "rss_sampling_interval_seconds": 0.01,
+  "rss_method": "Sample sum RSS of launched process + recursively discovered children, peak sampled sum",
+  "pandera_implementation": "Hybrid pandas precomputed masks + 53 Pandera DataFrameSchema/Check validations via calculate()",
+  "pandera_baseline_check_during_timing": false,
+  "note": "End-to-end comparison of two different pipelines and report outputs; not a comparison of isolated validator overhead. No prior DQM CSV read during timed Pandera run.",
+  "files": {
+    "worker": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\data_quality_monitor_project_20390204_thesis\\pandera_benchmark_worker.py",
+    "pandera_logic": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\data_quality_monitor_project_20390204_thesis\\compare_pandera_nyc311.py",
+    "rules": "C:\\Users\\Georg\\Desktop\\files (docs, images, text, pdf)\\diplomatiki\\Διπλωματική\\data_quality_monitor_project_20390204_thesis\\examples\\nyc311_rules_initial.json"
+  }
+}

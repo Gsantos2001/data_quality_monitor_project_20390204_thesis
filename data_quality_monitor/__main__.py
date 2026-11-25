@@ -1,4 +1,4 @@
-#Χρήση: python -m data_quality_monitor --input ... --rules ... --output ...
+#Usage: python -m data_quality_monitor --input ... --rules ... --output ...
 from __future__ import annotations
 
 import argparse
@@ -24,7 +24,13 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Αναγνωριστικό συνόλου δεδομένων (προαιρετικό)"
     )
+    parser.add_argument(
+        "--max-findings", type=int, default=None, metavar="N",
+        help="Μέγιστος αριθμός αναλυτικών ευρημάτων ανά έλεγχο (προεπιλογή: χωρίς όριο)"
+    )
     args = parser.parse_args(argv)
+    if args.max_findings is not None and args.max_findings < 0:
+        parser.error("Το --max-findings δεν μπορεί να είναι αρνητικό.")
 
     try:
          folder, report = run_analysis(
@@ -32,6 +38,7 @@ def main(argv: list[str] | None = None) -> int:
             args.rules,
             args.output,
             dataset_id=args.dataset_id,
+            max_findings=args.max_findings,
         )
     except (DataInputError, RulesError, OSError, ValueError) as exc:
         print(f"Σφάλμα: {exc}", file=sys.stderr)
@@ -42,7 +49,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Εγγραφές: {report['metadata']['row_count']}; στήλες: {report['metadata']['column_count']}")
     print(f"Έλεγχοι: ολοκληρωμένοι={counts['completed']}, παραλείψεις={counts['skipped']}, σφάλματα={counts['error']}")
     print(f"Αναφορές: {folder.resolve()}")
-    #Ο κωδικός εξόδου 1 υποδηλώνει τουλάχιστον μία τεχνική αποτυχία ελέγχου και όχι απλώς την ύπαρξη προβλημάτων ποιότητας δεδομένων.
+    # Code 1 signals at least one technical check failure, not data-quality issues.
     return 1 if counts["error"] else 0
 
 

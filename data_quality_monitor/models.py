@@ -1,4 +1,4 @@
-#Κοινές δομές αποτελεσμάτων που χρησιμοποιούνται από τους ανεξάρτητους ελέγχους ποιότητας.
+"""Κοινές δομές αποτελεσμάτων που χρησιμοποιούνται από τους ανεξάρτητους ελέγχους ποιότητας."""
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
@@ -26,6 +26,7 @@ class CheckResult:
     reason: str | None = None
     details: dict[str, Any] = field(default_factory=dict)
     findings: list[Finding] = field(default_factory=list)
+    findings_truncated: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         #Τα ευρήματα αποθηκεύονται τόσο σε ξεχωριστό αρχείο CSV όσο και στην αναφορά JSON.
@@ -40,8 +41,12 @@ def completed(
     *,
     not_evaluated_count: int = 0,
     details: dict[str, Any] | None = None,
+    issue_count: int | None = None,
 ) -> CheckResult:
-    issue_count = len(findings)
+    if issue_count is None:
+        issue_count = len(findings)
+    if issue_count < len(findings):
+        raise ValueError("Ο αριθμός προβλημάτων δεν μπορεί να είναι μικρότερος από τα ευρήματα.")
     rate = round(100 * issue_count / checked_count, 2) if checked_count else None
     return CheckResult(
         check_id=check_id,
@@ -53,6 +58,7 @@ def completed(
         not_evaluated_count=not_evaluated_count,
         details=details or {},
         findings=findings,
+        findings_truncated=issue_count > len(findings),
     )
 
 

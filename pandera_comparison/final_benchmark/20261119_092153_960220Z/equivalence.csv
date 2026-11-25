@@ -1,0 +1,13 @@
+﻿rows,repetition,differences,status
+1000,1,0,match
+1000,2,0,match
+1000,3,0,match
+10000,1,0,match
+10000,2,0,match
+10000,3,0,match
+100000,1,0,match
+100000,2,0,match
+100000,3,0,match
+1000000,1,0,match
+1000000,2,0,match
+1000000,3,0,match
