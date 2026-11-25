@@ -1,7 +1,105 @@
+
+# Εικονικά περιβάλλοντα Python
 .venv/
+venv/
+env/
+ENV/
+
+# Προσωρινά και μεταγλωττισμένα αρχεία Python
 __pycache__/
 *.pyc
-.pytest_cache/
-reports/
-monitoring_reports/
+*.pyo
+*.pyd
 
+# Προσωρινά αρχεία δοκιμών και ανάλυσης κώδικα
+.pytest_cache/
+.coverage
+.coverage.*
+
+# Τοπικές ρυθμίσεις περιβάλλοντος ανάπτυξης
+.vscode/
+.idea/
+
+# Τοπικές μεταβλητές περιβάλλοντος
+.env
+.env.*
+!.env.example
+
+# Αρχεία εγκατάστασης και διανομής
+build/
+dist/
+
+
+# Αρχεία καταγραφής εκτέλεσης
+*.log
+
+# Πρωτογενή δεδομένα NYC 311
+/nyc311_datasets/
+/NYC_311_expiriments/
+/NYC_311_experiments/
+nyc311_[0-9]*.csv
+
+# Παραγόμενες αναφορές αξιολόγησης
+/reports/
+/reports_*/
+
+# Παραγόμενες αναφορές ιστορικής παρακολούθησης
+/monitoring_reports/
+/monitoring_ch5_demo/
+/monitoring_ch5_nyc311_demo/
+
+# Αναλυτικές αναφορές πειραμάτων απόδοσης
+/benchmark_results/reports/
+
+# Προκαταρκτικές μετρήσεις απόδοσης
+/benchmark_results/benchmark_measurements.csv
+/benchmark_results/benchmark_measurements_100000_limited.csv
+
+# Παραγόμενα δεδομένα και αναφορές πειράματος αλλοιώσεων
+/nyc311_corruption_experiment/nyc311_10000_corrupted.csv
+/nyc311_corruption_experiment/baseline_reports/
+/nyc311_corruption_experiment/corrupted_reports/
+
+# Παραγόμενα δεδομένα πειράματος επιτρεπόμενων τιμών
+/nyc311_allowed_values_experiment/nyc311_10000_allowed_values_corrupted.csv
+
+# Προκαταρκτικά πειράματα Pandera
+/pandera_comparison/pilot_benchmark/
+
+# Αναλυτικά αποτελέσματα επιμέρους επαναλήψεων Pandera
+/pandera_comparison/final_benchmark/*/nyc311_*/
+
+# Διατήρηση αρχείων παραδειγμάτων και κανόνων
+!/examples/*.csv
+!/examples/*.json
+
+# Διατήρηση τελικών συγκεντρωτικών μετρήσεων
+!/benchmark_results/benchmark_measurements_final.csv
+
+# Διατήρηση αποτελεσμάτων πειράματος αλλοιώσεων
+!/nyc311_corruption_experiment/ground_truth.csv
+!/nyc311_corruption_experiment/experiment_manifest.json
+!/nyc311_corruption_experiment/verification_results.csv
+
+# Διατήρηση αποτελεσμάτων πειράματος επιτρεπόμενων τιμών
+!/nyc311_allowed_values_experiment/ground_truth.csv
+!/nyc311_allowed_values_experiment/verification_results.json
+
+# Διατήρηση αποτελεσμάτων χρονικής συνέπειας
+!/nyc311_time_consistency_experiment/*.json
+!/nyc311_time_consistency_experiment/*.csv
+
+# Διατήρηση τελικών αποτελεσμάτων ιστορικής παρακολούθησης
+!/monitoring_nyc311/*.json
+!/monitoring_nyc311/*.csv
+
+# Διατήρηση συγκεντρωτικών αποτελεσμάτων Pandera
+!/pandera_comparison/pandera_checks_10000.csv
+!/pandera_comparison/pandera_checks_10000_corrupted.csv
+!/pandera_comparison/final_benchmark/*/equivalence.csv
+!/pandera_comparison/final_benchmark/*/measurements.csv
+
+# Διατήρηση ενδεικτικών αναφορών χρήσης
+!/sample_output/*.csv
+!/sample_output/*.json
+!/sample_output/*.txt
